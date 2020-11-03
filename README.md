@@ -1,3 +1,16 @@
+Client ID c7d4ed444f9a4dd691f6bc93c4760568
+Client Secret f959b87840334d0282cd579eb8ffcc2d
+
+https://medium.com/reprogramabr/consumindo-a-api-do-spotify-um-breve-passo-a-passo-fd210312fdd
+
+De acordo com a documentação do Spotify, para que um projeto acesse os dados de sua API, é necessário que ele tenha permissão. Essa permissão pode ser obtida a partir de três diferentes tipos de autorização estipulados pelo Spotify: Authorization Code, Client Credentials e Implicit Grant. Utilizando o Authorization Code, o fluxo trabalha utilizando o protocolo de autorização OAuth 2.0, o qual, por sua vez, permite que nosso projeto acesse aos dados da API do Spotify toda vez que um usuário logar com sua conta ao acessar nossa aplicação.
+
+O aplicativo será autorizado a consumir os dados da API do Spotify toda vez que um usuário logar com sua conta e esse processo retornar um código de acesso, conhecido pelo termo token.
+
+O fluxo Authorization Guide, o token de acesso expira após 60 minutos. (o usuário deverá fazer login novamente para obter mais uma chave de acesso para que, consequentemente, nossa aplicação continue buscando pelos dados na API do Spotify)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
