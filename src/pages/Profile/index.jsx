@@ -1,38 +1,24 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import api from './../../services/api';
 
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    const parametros = this.getHashParams();
-    const token = parametros.access_token;
+const Profile = () => {
+
+  const [token, setToken] = useState('');
+  const [lang, setLang] = useState('');
+
+  useEffect(() => {
+    const parametros = getHashParams();
+    setToken(parametros.access_token);
     console.log(token);
-    this.state = {
-      token: parametros.access_token
-    };
-    this.teste = 'this is teste';
-  }
+  }, []);
 
-  // getUserData() {
-  //   // setLoading(true);
-  //   api.get("/tracks",
-  //       {
-  //         token
-  //           //options we want to pass to get:
-  //           // cancelToken: new axios.CancelToken(c => cancelOldRequest = c)
-  //       }).then(response => {
-  //       // console.log(response.data.results);
-  //       // setLoading(false);
-  //       // console.log(response.data.results);
-  //       // const pokemonData = response.data.results;
-  //       // setPokemonList(pokemonData);
-  //       // setfilteredPokemons(pokemonData);
-  //   });
-  //   // cancel previous request every time we make a new one, making sure the application never loads old data
-  //   // return () => cancelOldRequest();
-  // }
+  useEffect(() => {
 
-  getHashParams() {
+  }, [])
+
+  function getHashParams() {
     var hashParams = {};
     var e,
       r = /([^&;=]+)=?([^&;]*)/g,
@@ -43,11 +29,20 @@ class Profile extends React.Component {
     return hashParams;
   }
 
-  render() {
-    return (
-      <p>{this.state.token}</p>
-    );
+  function handleSelectChange(event) {
+    console.log(event.target);
+    setLang(event.target);
+    console.log(lang);
   }
+
+    return (
+      // <p>{token}</p>
+      <select onChange={handleSelectChange}>
+        <option value="0">Selecione uma linguagem</option>
+        <option value="1">pt</option>
+        <option value="2">en</option>
+      </select>
+    );
 }
 
 export default Profile;
