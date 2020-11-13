@@ -11,12 +11,20 @@ const Profile = () => {
   useEffect(() => {
     const parametros = getHashParams();
     setToken(parametros.access_token);
-    console.log(token);
   }, []);
 
   useEffect(() => {
-
-  }, [])
+    console.log(lang)
+    if (lang !== '' && token !== '') {
+      api.get("/tracks", 
+      {
+        token,
+        lang,
+      }).then(
+        console.log('conectou')
+      )
+    }
+  }, [token, lang]);
 
   function getHashParams() {
     var hashParams = {};
@@ -30,19 +38,19 @@ const Profile = () => {
   }
 
   function handleSelectChange(event) {
-    console.log(event.target);
-    setLang(event.target);
-    console.log(lang);
+    setLang(event.target.value);
   }
 
-    return (
-      // <p>{token}</p>
+  return (
+    <>
+    <p>{lang}</p>
       <select onChange={handleSelectChange}>
-        <option value="0">Selecione uma linguagem</option>
-        <option value="1">pt</option>
-        <option value="2">en</option>
+        <option value="">Selecione uma linguagem</option>
+        <option value="pt">Português</option>
+        <option value="en">Inglês</option>
       </select>
-    );
+    </>
+  );
 }
 
 export default Profile;
