@@ -6,7 +6,6 @@ import api from "./../../services/api";
 const Profile = () => {
   const [token, setToken] = useState("");
   const [lang, setLang] = useState("");
-  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     const parametros = getHashParams();
