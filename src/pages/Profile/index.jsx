@@ -47,9 +47,9 @@ const Profile = () => {
       </select>
 
       
-      <a href={url} class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
+      <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
 
-      <a href="#" class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
+      <a href={url} class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
 
 
       {/* {tracks.map((item) => {

@@ -32,6 +32,7 @@ const Tracks = () => {
           })
           .catch((error) => {
             console.log(error);
+            alert("Tente de novo.");
           });
       }
 
@@ -63,10 +64,12 @@ const Tracks = () => {
       <div className="colour-bg">
         <h1>Tracks sugeridas:</h1>
         {tracks.map((item) => {
+          var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
           return (
             <>
               <p>
                 {item.trackName} de {item.principalArtist}
+                <a target="_blank" href={url}>Abrir no Spotify</a>
               </p>
             </>
           );
