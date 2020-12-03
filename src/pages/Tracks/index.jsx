@@ -6,38 +6,55 @@ import api from "./../../services/api";
 const Tracks = () => {
   const [tracks, setTracks] = useState([]);
 
-  useEffect(() => {
+  useEffect((token, lang) => {
     const parametros = getHashParams();
-    setToken(parametros.access_token);
-  }, []);
+    var token = parametros.token;
+    var lang = parametros.lang;
 
-  useEffect(() => {
     if (lang !== "" && token !== "") {
+      async function getTracksApiConnection(token, lang) {
+        console.log("Estabelecendo conexão com o servidor...");
+
+        // Conexão com o Backend via AXIOS
+        await api
+          .get(`/tracks?token=${token}&lang=${lang}`)
+          .then((response) => {
+            if (response.status === 200) {
+              console.log("Conectado com sucesso!");
+              setTracks(response.data);
+            } else if (response.data === 500) {
+              console.log("Erro ao consultar token, tente novamente!");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
       getTracksApiConnection(token, lang);
     }
-  }, [token, lang]);
+  }, []);
 
-  async function getTracksApiConnection(token, lang){
-    console.log("Estabelecendo conexão com o servidor...");
-
-    // Conexão com o Backend via AXIOS
-    await api.get(`/tracks?token=${token}&lang=${lang}`).then(response => {
-      if(response.status === 200){
-        console.log("Conectado com sucesso!");
-        
-        var list = response.data;  
-        console.log(list); 
-        setTracks(list);
-      }
-    }).catch(error => {
-      console.log(error);
-    });
-
-    console.log(tracks);
+  function getHashParams() {
+    var hashParams = {};
+    var e,
+      r = /([^&;=]+)=?([^&;]*)/g,
+      q = window.location.hash.substring(1);
+    while ((e = r.exec(q))) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
   }
 
   return (
     <>
+      {tracks.map((item) => {
+        return (
+          <p>
+            {item.trackName} de {item.principalArtist}
+          </p>
+        );
+      })}
     </>
   );
 };

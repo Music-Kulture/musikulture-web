@@ -7,6 +7,7 @@ import "./profile.css";
 const Profile = () => {
   const [token, setToken] = useState("");
   const [lang, setLang] = useState("");
+  const [url, setUrl] = useState("");
   const [tracks, setTracks] = useState([{}]);
 
   useEffect(() => {
@@ -14,33 +15,10 @@ const Profile = () => {
     setToken(parametros.access_token);
   }, []);
 
-  // useEffect(() => {
-
-  // }, [tracks])
-
   useEffect(() => {
-    if (lang !== "" && token !== "") {
-      async function getTracksApiConnection(token, lang) {
-        console.log("Estabelecendo conexão com o servidor...");
-
-        // Conexão com o Backend via AXIOS
-        await api
-          .get(`/tracks?token=${token}&lang=${lang}`)
-          .then((response) => {
-            if (response.status === 200) {
-              console.log("Conectado com sucesso!");
-              setTracks(response.data);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            alert("Erro ao consultar token, tente novamente!")
-          });
-      }
-
-      getTracksApiConnection(token, lang);
-    }
-  }, [token, lang]);
+    const redirectURL = `/tracks/#token=${token}&lang=${lang}`;
+    setUrl(redirectURL);
+  }, [lang])
 
   function getHashParams() {
     var hashParams = {};
@@ -59,7 +37,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="bg">
+      <div className="background">
       <p>{lang}</p>
     
       <select onChange={handleSelectChange} className="select form-control-lg">
@@ -69,18 +47,18 @@ const Profile = () => {
       </select>
 
       
-      <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
+      <a href={url} class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
 
       <a href="#" class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
 
 
-      {tracks.map((item) => {
+      {/* {tracks.map((item) => {
         return (
           <p>
             {item.trackName} - {item.principalArtist}
           </p>
         );
-      })}
+      })} */}
       </div>
     </>
   );
