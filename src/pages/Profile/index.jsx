@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import api from "./../../services/api";
+import "./profile.css";
 
 const Profile = () => {
   const [token, setToken] = useState("");
@@ -58,12 +59,20 @@ const Profile = () => {
 
   return (
     <>
+      <div className="bg">
       <p>{lang}</p>
-      <select onChange={handleSelectChange}>
-        <option value="">Selecione uma linguagem</option>
+    
+      <select onChange={handleSelectChange} className="select form-control-lg">
+        <option value="">Linguagens disponíveis</option>
         <option value="pt">Português</option>
         <option value="en">Inglês</option>
       </select>
+
+      
+      <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
+
+      <a href="#" class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
+
 
       {tracks.map((item) => {
         return (
@@ -72,6 +81,7 @@ const Profile = () => {
           </p>
         );
       })}
+      </div>
     </>
   );
 };
