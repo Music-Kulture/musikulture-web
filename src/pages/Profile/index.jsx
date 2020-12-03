@@ -1,28 +1,43 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import api from './../../services/api';
+import api from "./../../services/api";
 
 const Profile = () => {
-
-  const [token, setToken] = useState('');
-  const [lang, setLang] = useState('');
+  const [token, setToken] = useState("");
+  const [lang, setLang] = useState("");
+  const [tracks, setTracks] = useState([{}]);
 
   useEffect(() => {
     const parametros = getHashParams();
     setToken(parametros.access_token);
   }, []);
 
+  // useEffect(() => {
+
+  // }, [tracks])
+
   useEffect(() => {
-    console.log(lang)
-    if (lang !== '' && token !== '') {
-      api.get("/tracks", 
-      {
-        token,
-        lang,
-      }).then(
-        console.log('conectou')
-      )
+    if (lang !== "" && token !== "") {
+      async function getTracksApiConnection(token, lang) {
+        console.log("Estabelecendo conexão com o servidor...");
+
+        // Conexão com o Backend via AXIOS
+        await api
+          .get(`/tracks?token=${token}&lang=${lang}`)
+          .then((response) => {
+            if (response.status === 200) {
+              console.log("Conectado com sucesso!");
+              setTracks(response.data);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("Erro ao consultar token, tente novamente!")
+          });
+      }
+
+      getTracksApiConnection(token, lang);
     }
   }, [token, lang]);
 
@@ -43,14 +58,22 @@ const Profile = () => {
 
   return (
     <>
-    <p>{lang}</p>
+      <p>{lang}</p>
       <select onChange={handleSelectChange}>
         <option value="">Selecione uma linguagem</option>
         <option value="pt">Português</option>
         <option value="en">Inglês</option>
       </select>
+
+      {tracks.map((item) => {
+        return (
+          <p>
+            {item.trackName} - {item.principalArtist}
+          </p>
+        );
+      })}
     </>
   );
-}
+};
 
 export default Profile;
