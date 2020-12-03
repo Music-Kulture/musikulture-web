@@ -2,9 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import api from "./../../services/api";
+import "./tracks.css";
 
 const Tracks = () => {
   const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect((token, lang) => {
     const parametros = getHashParams();
@@ -12,9 +14,10 @@ const Tracks = () => {
     var lang = parametros.lang;
 
     if (lang !== "" && token !== "") {
+      setLoading(true);
+
       async function getTracksApiConnection(token, lang) {
         console.log("Estabelecendo conexão com o servidor...");
-
         // Conexão com o Backend via AXIOS
         await api
           .get(`/tracks?token=${token}&lang=${lang}`)
@@ -22,6 +25,7 @@ const Tracks = () => {
             if (response.status === 200) {
               console.log("Conectado com sucesso!");
               setTracks(response.data);
+              setLoading(false);
             } else if (response.data === 500) {
               console.log("Erro ao consultar token, tente novamente!");
             }
@@ -46,15 +50,28 @@ const Tracks = () => {
     return hashParams;
   }
 
+  if (loading) {
+    return (
+      <div className="colour-bg">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      {tracks.map((item) => {
-        return (
-          <p>
-            {item.trackName} de {item.principalArtist}
-          </p>
-        );
-      })}
+      <div className="colour-bg">
+        <h1>Tracks sugeridas:</h1>
+        {tracks.map((item) => {
+          return (
+            <>
+              <p>
+                {item.trackName} de {item.principalArtist}
+              </p>
+            </>
+          );
+        })}
+      </div>
     </>
   );
 };
