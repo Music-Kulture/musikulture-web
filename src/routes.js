@@ -9,6 +9,7 @@ const Routes = () => {
         <BrowserRouter>
             <Route component={Home} path="/" exact />
             <Route component={Profile} path="/profile" exact />
+            <Route component={Profile} path="/tracks" exact />
         </BrowserRouter>
     );
 }
