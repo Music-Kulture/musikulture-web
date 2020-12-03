@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import api from './../../services/api';
+import api from "./../../services/api";
 
 const Profile = () => {
-
-  const [token, setToken] = useState('');
-  const [lang, setLang] = useState('');
+  const [token, setToken] = useState("");
+  const [lang, setLang] = useState("");
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     const parametros = getHashParams();
@@ -14,17 +14,35 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    console.log(lang)
-    if (lang !== '' && token !== '') {
-      api.get("/tracks", 
-      {
-        token,
-        lang,
-      }).then(
-        console.log('conectou')
-      )
+    if (lang !== "" && token !== "") {
+      getTracksApiConnection(token, lang);
     }
   }, [token, lang]);
+
+  async function getTracksApiConnection(token, lang){
+    console.log("Estabelecendo conexão com o servidor...");
+    const response = await api.get(`/tracks?token=${token}&lang=${lang}`).then(response => {
+      if(response.status === 200){
+        console.log("Conectado com sucesso!");
+        console.log(response.data);
+  
+        // PARA ACESSAR CADA OBJETO E SUAS PROPRIEDADES:
+        for(var i = 0; i < response.data.length; i++){
+          var obj = response.data[i];
+          
+          console.log("------------------------------");
+          console.log(obj["trackName"]);
+          console.log(obj["principalArtist"]);
+        }
+  
+        console.log("------------------------------");
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+
+    return response;
+  }
 
   function getHashParams() {
     var hashParams = {};
@@ -43,7 +61,7 @@ const Profile = () => {
 
   return (
     <>
-    <p>{lang}</p>
+      <p>{lang}</p>
       <select onChange={handleSelectChange}>
         <option value="">Selecione uma linguagem</option>
         <option value="pt">Português</option>
@@ -51,6 +69,6 @@ const Profile = () => {
       </select>
     </>
   );
-}
+};
 
 export default Profile;
