@@ -1,4 +1,29 @@
-.colour-bg{
-    background-color: #011641;
-    color: #FFF;
+.gif-bg{
+    background-image: url("https://i.pinimg.com/originals/69/80/58/698058d1d4f38bd1ceef0b3eed72f7aa.gif");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #141414;
+    color: white;
+    text-align: center;
+    padding-top: 27%;
+
 }
+
+.colour-bg{
+    background-image: url("https://uploaddeimagens.com.br/images/002/990/686/original/Captura_de_Tela_2020-12-04_a%CC%80s_18.01.00.png?1607115703");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding-top: 27%;
+}
+
+.link_spotify  {
+
+    margin-top: -5px;
+    
+}
+

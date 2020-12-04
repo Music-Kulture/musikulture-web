@@ -37,28 +37,27 @@ const Profile = () => {
 
   return (
     <>
-      <div className="background">
-      <p>{lang}</p>
-    
-      <select onChange={handleSelectChange} className="select form-control-lg">
-        <option value="">Linguagens disponíveis</option>
-        <option value="pt">Português</option>
-        <option value="en">Inglês</option>
-      </select>
+      <div className="prof container-fluid">
+        <p>{lang}</p>
+        <div className="row col-11">
+          <div className="select">
+              <select onChange={handleSelectChange} id="idiomas" className="form-control-lg" >
+                <option key='blankChoice' hidden value> Linguagens disponíveis</option>
+                <option value="pt">Português</option>
+                <option value="en">Inglês</option>
+              </select>
+          </div>
 
-      
-      <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
+          <a href={url} class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
+        </div>
 
-      <a href={url} class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
-
-
-      {/* {tracks.map((item) => {
-        return (
-          <p>
-            {item.trackName} - {item.principalArtist}
-          </p>
-        );
-      })} */}
+        {/* {tracks.map((item) => {
+          return (
+            <p>
+              {item.trackName} - {item.principalArtist}
+            </p>
+          );
+        })} */}
       </div>
     </>
   );

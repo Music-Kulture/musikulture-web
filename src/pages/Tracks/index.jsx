@@ -53,8 +53,8 @@ const Tracks = () => {
 
   if (loading) {
     return (
-      <div className="colour-bg">
-        <p>Loading...</p>
+      <div className="gif-bg col-12">
+        <h1 lassName="text-center">Loading...</h1>
       </div>
     );
   }
@@ -62,15 +62,14 @@ const Tracks = () => {
   return (
     <>
       <div className="colour-bg">
-        <h1>Tracks sugeridas:</h1>
         {tracks.map((item) => {
           var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
           return (
             <>
-              <p>
-                {item.trackName} de {item.principalArtist}
-                <a target="_blank" href={url}>Abrir no Spotify</a>
-              </p>
+              <div className="alert alert-dark">
+              {item.trackName} de {item.principalArtist} <a target="_blank" href={url} className="link_spotify btn btn-success">Abrir no Spotify</a> 
+              </div>
+                    
             </>
           );
         })}
