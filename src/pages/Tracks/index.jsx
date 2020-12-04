@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from "react-router-dom";
 import api from "./../../services/api";
 import "./tracks.css";
 
@@ -10,10 +10,10 @@ const Tracks = () => {
 
   const history = useHistory();
 
-  useEffect((token, lang) => {
+  useEffect(() => {
     const parametros = getHashParams();
-    var token = parametros.token;
-    var lang = parametros.lang;
+    const token = parametros.token;
+    const lang = parametros.lang;
 
     if (lang !== "" && token !== "") {
       setLoading(true);
@@ -28,13 +28,12 @@ const Tracks = () => {
               console.log("Conectado com sucesso!");
               setTracks(response.data);
               setLoading(false);
-            } else if (response.data === 500) {
-              console.log("Erro ao consultar token, tente novamente!");
+            } else if (response.status === 500) {
+              alert("Erro ao consultar token, tente novamente!");
             }
           })
           .catch((error) => {
             console.log(error);
-            alert("Tente de novo.");
           });
       }
 
@@ -58,11 +57,13 @@ const Tracks = () => {
       <div className="colour-bg">
         <div className="tracks">
           <Link
-            class="purple-button btn-lg"
+            className="purple-button btn-lg"
             onClick={() => {
               history.goBack();
             }}
-          >Escolher outra linguagem</Link>
+          >
+            Escolher outra linguagem
+          </Link>
         </div>
       </div>
     );
@@ -72,21 +73,24 @@ const Tracks = () => {
     <>
       <div className="colour-bg">
         <div className="tracks">
-
           <Link
-            class="purple-button btn-lg"
+            className="purple-button btn-lg"
             onClick={() => {
               history.goBack();
             }}
-          >Escolher outra linguagem</Link>
+          >
+            Escolher outra linguagem
+          </Link>
           <h1>Tracks sugeridas:</h1>
           {tracks.map((item) => {
-            var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
+            var url = `https://open.spotify.com/track/${item.spotifyTrackId}`;
             return (
               <>
                 <p>
                   {item.trackName} de {item.principalArtist}
-                  <a target="_blank" href={url}>Abrir no Spotify</a>
+                  <a target="_blank" href={url}>
+                    Abrir no Spotify
+                  </a>
                 </p>
               </>
             );

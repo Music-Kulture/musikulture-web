@@ -7,7 +7,6 @@ const Profile = () => {
   const [token, setToken] = useState("");
   const [lang, setLang] = useState("");
   const [url, setUrl] = useState("");
-  const [tracks, setTracks] = useState([{}]);
 
   useEffect(() => {
     const parametros = getHashParams();
@@ -46,23 +45,12 @@ const Profile = () => {
         <option value="en">Inglês</option>
       </select>
 
-      
-      {/* <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a> */}
-
       <Link 
         to={url} 
-        class="btn2 btn-info btn-lg"
+        className="btn2 btn-info btn-lg"
         onClick={() => history.push("/profile", { from: "Tracks" })}
       >Novas músicas</Link>
 
-
-      {/* {tracks.map((item) => {
-        return (
-          <p>
-            {item.trackName} - {item.principalArtist}
-          </p>
-        );
-      })} */}
       </div>
     </>
   );
