@@ -14,8 +14,11 @@ body, html {
 }
 
 .btn{
-    position:absolute; 
-    top:65%;
-    left:74%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 66%;
+    right: 19%;
+    word-wrap: break-word;
+    width: 215px;
+    padding: 0 5px;
+    text-align: center;
  }

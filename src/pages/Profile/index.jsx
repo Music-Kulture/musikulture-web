@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import api from "./../../services/api";
+import { useState,  useEffect } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import "./profile.css";
 
 const Profile = () => {
@@ -35,6 +34,7 @@ const Profile = () => {
     setLang(event.target.value);
   }
 
+  const history = useHistory();
   return (
     <>
       <div className="background">
@@ -47,9 +47,13 @@ const Profile = () => {
       </select>
 
       
-      <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a>
+      {/* <a href="#" class="btn1 btn-info btn-lg" type="button">Músicas que você curtiu</a> */}
 
-      <a href={url} class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
+      <Link 
+        to={url} 
+        class="btn2 btn-info btn-lg"
+        onClick={() => history.push("/profile", { from: "Tracks" })}
+      >Novas músicas</Link>
 
 
       {/* {tracks.map((item) => {

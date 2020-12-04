@@ -2,3 +2,43 @@
     background-color: #011641;
     color: #FFF;
 }
+
+.tracks {
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 620px;
+}
+.tracks h1 {
+    padding-bottom: 20px;
+}
+.tracks p a {
+    margin-left: 20px;
+    color: #fff;
+    padding: 5px 8px;
+    color: #3fb43f;
+    text-decoration: underline;
+}
+
+.purple-button{
+    position:absolute; 
+    top:10%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    word-wrap: break-word;
+    width: 270px;
+    padding: 0 5px;
+    background-color: #795aa2;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.purple-button:hover{
+    text-decoration: none;
+    color: #fff;
+    background-color: darken(#795aa2, 20%);
+    
+}

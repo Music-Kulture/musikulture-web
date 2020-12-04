@@ -1,12 +1,14 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import api from "./../../services/api";
 import "./tracks.css";
 
 const Tracks = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const history = useHistory();
 
   useEffect((token, lang) => {
     const parametros = getHashParams();
@@ -54,7 +56,14 @@ const Tracks = () => {
   if (loading) {
     return (
       <div className="colour-bg">
-        <p>Loading...</p>
+        <div className="tracks">
+          <Link
+            class="purple-button btn-lg"
+            onClick={() => {
+              history.goBack();
+            }}
+          >Escolher outra linguagem</Link>
+        </div>
       </div>
     );
   }
@@ -62,18 +71,27 @@ const Tracks = () => {
   return (
     <>
       <div className="colour-bg">
-        <h1>Tracks sugeridas:</h1>
-        {tracks.map((item) => {
-          var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
-          return (
-            <>
-              <p>
-                {item.trackName} de {item.principalArtist}
-                <a target="_blank" href={url}>Abrir no Spotify</a>
-              </p>
-            </>
-          );
-        })}
+        <div className="tracks">
+
+          <Link
+            class="purple-button btn-lg"
+            onClick={() => {
+              history.goBack();
+            }}
+          >Escolher outra linguagem</Link>
+          <h1>Tracks sugeridas:</h1>
+          {tracks.map((item) => {
+            var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
+            return (
+              <>
+                <p>
+                  {item.trackName} de {item.principalArtist}
+                  <a target="_blank" href={url}>Abrir no Spotify</a>
+                </p>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );
