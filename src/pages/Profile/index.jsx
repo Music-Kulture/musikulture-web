@@ -1,14 +1,12 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import api from "./../../services/api";
+import { useState,  useEffect } from "react";
+import { Link, useHistory } from 'react-router-dom';
 import "./profile.css";
 
 const Profile = () => {
   const [token, setToken] = useState("");
   const [lang, setLang] = useState("");
   const [url, setUrl] = useState("");
-  const [tracks, setTracks] = useState([{}]);
 
   useEffect(() => {
     const parametros = getHashParams();
@@ -35,6 +33,7 @@ const Profile = () => {
     setLang(event.target.value);
   }
 
+  const history = useHistory();
   return (
     <>
       <div className="prof container-fluid">
@@ -48,8 +47,7 @@ const Profile = () => {
               </select>
           </div>
 
-          <a href={url} class="btn2 btn-info btn-lg" type="button">Novas músicas</a>
-        </div>
+          
 
         {/* {tracks.map((item) => {
           return (
@@ -58,6 +56,13 @@ const Profile = () => {
             </p>
           );
         })} */}
+      <Link 
+        to={url} 
+        className="btn2 btn-info btn-lg"
+        onClick={() => history.push("/profile", { from: "Tracks" })}
+      >Novas músicas</Link>
+        
+        </div>
       </div>
     </>
   );

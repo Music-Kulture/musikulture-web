@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import api from "./../../services/api";
 import "./tracks.css";
 
@@ -8,10 +8,12 @@ const Tracks = () => {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect((token, lang) => {
+  const history = useHistory();
+
+  useEffect(() => {
     const parametros = getHashParams();
-    var token = parametros.token;
-    var lang = parametros.lang;
+    const token = parametros.token;
+    const lang = parametros.lang;
 
     if (lang !== "" && token !== "") {
       setLoading(true);
@@ -26,13 +28,12 @@ const Tracks = () => {
               console.log("Conectado com sucesso!");
               setTracks(response.data);
               setLoading(false);
-            } else if (response.data === 500) {
-              console.log("Erro ao consultar token, tente novamente!");
+            } else if (response.status === 500) {
+              alert("Erro ao consultar token, tente novamente!");
             }
           })
           .catch((error) => {
             console.log(error);
-            alert("Tente de novo.");
           });
       }
 
@@ -53,26 +54,49 @@ const Tracks = () => {
 
   if (loading) {
     return (
+      <>
       <div className="gif-bg col-12">
         <h1 lassName="text-center">Loading...</h1>
       </div>
+
+      {/* <div className="tracks">
+        <Link
+            className="purple-button btn-lg"
+            to="http://localhost:8888/login"
+          >
+            Voltar
+        </Link>
+        </div> */}
+        </>
     );
   }
 
   return (
     <>
       <div className="colour-bg">
-        {tracks.map((item) => {
-          var url = `https://open.spotify.com/track/${item.spotifyTrackId}`
-          return (
-            <>
-              <div className="alert alert-dark">
-              {item.trackName} de {item.principalArtist} <a target="_blank" href={url} className="link_spotify btn btn-success">Abrir no Spotify</a> 
-              </div>
-                    
-            </>
-          );
-        })}
+        <div className="tracks">
+          {/* <Link
+            className="purple-button btn-lg"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            Escolher outra linguagem
+          </Link> */}
+          {tracks.map((item) => {
+            var url = `https://open.spotify.com/track/${item.spotifyTrackId}`;
+            return (
+              <>
+                <p>
+                  {item.trackName} de {item.principalArtist}
+                  <a target="_blank" href={url}>
+                    Abrir no Spotify
+                  </a>
+                </p>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

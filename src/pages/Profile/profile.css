@@ -35,33 +35,6 @@
     
 }
 
-/*
-.select{
-    position:absolute; 
-    top:50%;
-    left:30%;
-    transform: translate(-50%, -50%);
-    width: 25%;
- }
-
-.btn1{
-    position:absolute; 
-    top:66%;
-    left:42.5%;
-    transform: translate(-50%, -50%);
-    word-wrap: break-word;
-    width: 10%;
-    text-align: center;
- }
-
-
-.btn2{
-    position:absolute; 
-    top:66%;
-    left:57.5%;
-    transform: translate(-50%, -50%);
-    word-wrap: break-word;
-    width: 10%;
-    text-align: center;
- }
- */
+.btn2:hover{
+    text-decoration: none;
+}
