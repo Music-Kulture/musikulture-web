@@ -38,7 +38,7 @@ const Profile = () => {
     <>
       <div className="prof container-fluid">
         <p>{lang}</p>
-        <div className="row col-11">
+        <div className="leng row col-11">
           <div className="select">
               <select onChange={handleSelectChange} id="idiomas" className="form-control-lg" >
                 <option key='blankChoice' hidden value> Linguagens disponíveis</option>

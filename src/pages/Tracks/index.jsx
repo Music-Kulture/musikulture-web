@@ -73,16 +73,8 @@ const Tracks = () => {
 
   return (
     <>
-      <div className="colour-bg">
+      <div className="colour-bg container-fluid">
         <div className="tracks">
-          {/* <Link
-            className="purple-button btn-lg"
-            onClick={() => {
-              history.goBack();
-            }}
-          >
-            Escolher outra linguagem
-          </Link> */}
           {tracks.map((item) => {
             var url = `https://open.spotify.com/track/${item.spotifyTrackId}`;
             return (
@@ -96,7 +88,17 @@ const Tracks = () => {
               </>
             );
           })}
-        </div>
+      </div>
+      <div className="voltar">
+        {<Link
+              className="purple-button btn-lg"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              Escolher outra linguagem
+        </Link>}
+      </div>
       </div>
     </>
   );
